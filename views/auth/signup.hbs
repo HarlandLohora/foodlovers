@@ -1,27 +1,27 @@
 <form action="/auth/signup" method="POST">
   <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Name</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" name="name">
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" name="name" value="harland">
    </div>
    <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Email</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" name="email">
+      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" name="email" value="harland@123.com">
    </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Phone</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Phone" name="phone">
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Phone" name="phone" value="123432234234">
    </div>
    <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password" name="password">
+      <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password" name="password" value="harland@123.com">
    </div>
    <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Address</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Address" name="address">
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Address" name="address" value="harland@123.com">
    </div>
    <select class="form-select" aria-label="Default select example" name="role">
-      <option selected>Selecciona tu role</option>
-      <option value="user">User</option>
+      <option >Selecciona tu role</option>
+      <option value="user" selected>User</option>
       <option value="delivery">Delivery</option>
       <option value="restaurant">Restaurant</option>
       <option value="admin">Admin</option>
@@ -31,6 +31,8 @@
    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-{{#if errorMessage}}
-   {{errorMessage}}
-{{/if}}
+   {{#if errorMessage}}
+   <div class="alert alert-danger" role="alert">
+         {{errorMessage}}
+   </div>
+   {{/if}}

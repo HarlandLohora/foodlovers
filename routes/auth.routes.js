@@ -51,7 +51,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
     if (found) {
       return res
         .status(400)
-        .render("auth/signup", { errorMessage: "Username already taken." });
+        .render("auth/signup", { errorMessage: "Email already taken." });
     }
 
     // if user is not found, create a new user - start with hashing the password
@@ -73,8 +73,16 @@ router.post("/signup", isLoggedOut, (req, res) => {
         // Bind the user to the session object
         req.session.user = user;
         //Verificar el role del usuario
+
         //Switch dependiendo del role
-        res.redirect("/");
+
+        switch (user.role) {
+          case "user":
+            res.redirect("/user/profile");
+            break;
+          case "admin":
+            res.redirect("/admin/dashboard");
+        }
       })
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
@@ -100,12 +108,12 @@ router.get("/login", isLoggedOut, (req, res) => {
 });
 
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Please provide your username." });
+      .render("auth/login", { errorMessage: "Please provide your email." });
   }
 
   // Here we use the same logic as above
@@ -116,8 +124,8 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     });
   }
 
-  // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  // Search the database for a user with the email submitted in the form
+  User.findOne({ email })
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {
@@ -136,7 +144,15 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 
         req.session.user = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
-        return res.redirect("/");
+
+        //dependiendo del role
+        switch (user.role) {
+          case "user":
+            res.redirect("/user/profile");
+            break;
+          case "admin":
+            res.redirect("/admin/dashboard");
+        }
       });
     })
 
