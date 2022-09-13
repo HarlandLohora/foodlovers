@@ -1,4 +1,4 @@
-<form action="/auth/signup" method="POST">
+<form action="/auth/signup" method="POST" enctype="multipart/form-data">
   <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Name</label>
       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" name="name" value="harland">
@@ -27,7 +27,8 @@
       <option value="admin">Admin</option>
    </select>
    
-
+   <input type="file" name="profilePic"/>
+   <br />
    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

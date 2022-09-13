@@ -1,1 +1,8 @@
 <h1>Vista de USUARIO {{name}}</h1>
+
+<img src="{{profilePic}}"/>
+
+<form action="/auth/actualizarFoto" method="post" enctype="multipart/form-data">
+  <input type="file" name="profilePic">
+  <button type="submit">Actualizar</button>
+</form>
